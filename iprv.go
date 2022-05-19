@@ -63,7 +63,7 @@ func main() {
 		println("P and R doesn't work")
 		os.Exit(1)
 	} else {
-		println("bad logic")
+		println("bad arg")
 		os.Exit(1)
 	}
 
