@@ -59,9 +59,6 @@ func main() {
 		println("ri to pv")
 		v = r * i
 		p = i * v
-	} else if p > 0 && r > 0 {
-		println("P and R doesn't work")
-		os.Exit(1)
 	} else {
 		println("bad arg")
 		os.Exit(1)
@@ -71,5 +68,4 @@ func main() {
 	fmt.Printf("power:      P = %1.3g\n", p)
 	fmt.Printf("voltage:    V = %1.3g\n", v)
 	fmt.Printf("resistance: R = %1.3g\n", r)
-
 }
