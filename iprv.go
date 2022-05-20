@@ -22,6 +22,7 @@ func main() {
 	for ac, av := range args {
 		switch ac {
 		case 0, 1:
+			// we might want to implement some sanity checking here some day.
 			xx := strings.Split(av, "=")
 			switch xx[0] {
 			case "i", "I", "a", "A":
@@ -64,8 +65,8 @@ func main() {
 		os.Exit(1)
 	}
 
+	fmt.Printf("resistance: R = %1.3g\n", r)
+	fmt.Printf("voltage:    V = %1.3g\n", v)
 	fmt.Printf("current:    I = %1.3g\n", i)
 	fmt.Printf("power:      P = %1.3g\n", p)
-	fmt.Printf("voltage:    V = %1.3g\n", v)
-	fmt.Printf("resistance: R = %1.3g\n", r)
 }
