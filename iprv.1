@@ -1,4 +1,4 @@
-.TH ipvr 1 19-May-2022 "Kozmix Go"
+.TH ipvr 1 22-May-2022 "Kozmix Go"
 
 .SH NAME
 ipvr \- calculate electrical current, power, resistance and/or voltage
@@ -9,8 +9,8 @@ ipvr \- calculate electrical current, power, resistance and/or voltage
 
 .SH DESCRIPTION
 .BR ipvr,
-given almost any two out of electrical current, power, resistance or
-voltage, will calculate the missing two values. You must call
+given any two out of electrical current, power, resistance or
+voltage, will calculate the other two values. You must call
 .B ipvr
 with exactly two arguments.
 
@@ -37,10 +37,6 @@ voltage:    V = 5.23
 current:    I = 0.654
 power:      P = 3.42
 .EE
-
-.SH BUGS
-.B ipvr P=val R=val
-doesn't work. This is due to a bug in the universe, not in this programme.
 
 .SH AUTHOR
 svm

@@ -1,6 +1,6 @@
 // IPRV -- calculate current, power, resistance and/or voltage from any two.
 //
-// svm 19-MAY-2020
+// svm 19-MAY-2020 - 22-MAY-2022
 //
 // I = V/R         R = V/I         V = R*I
 // P = I*V         I = P/V         V = P/I
@@ -10,6 +10,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -22,7 +23,8 @@ func main() {
 	for ac, av := range args {
 		switch ac {
 		case 0, 1:
-			// we might want to implement some sanity checking here some day.
+			// we might want to implement some sort of
+			// sanity checking here some day.
 			xx := strings.Split(av, "=")
 			switch xx[0] {
 			case "i", "I", "a", "A":
@@ -60,6 +62,10 @@ func main() {
 		println("ri to pv")
 		v = r * i
 		p = i * v
+	} else if r > 0 && p > 0 {
+		println("rp to vi")
+		v = math.Sqrt(r * p)
+		i = v / r
 	} else {
 		println("bad arg")
 		os.Exit(1)
