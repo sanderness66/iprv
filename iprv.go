@@ -1,6 +1,6 @@
 // IPRV -- calculate current, power, resistance and/or voltage from any two.
 //
-// svm 19-MAY-2020 - 22-MAY-2022
+// svm 19-MAY-2022 - 22-MAY-2022
 //
 // I = V/R         R = V/I         V = R*I
 // P = I*V         I = P/V         V = P/I
