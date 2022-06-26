@@ -27,7 +27,7 @@ func main() {
 			// sanity checking here some day.
 			xx := strings.Split(av, "=")
 			switch xx[0] {
-			case "i", "I", "a", "A":
+			case "i", "I":
 				i, _ = strconv.ParseFloat(xx[1], 32)
 			case "p", "P":
 				p, _ = strconv.ParseFloat(xx[1], 32)
