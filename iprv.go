@@ -43,27 +43,27 @@ func main() {
 	}
 
 	if p > 0 && v > 0 {
-		println("pv to ir")
+		// println("pv to ir")
 		i = p / v
 		r = v / i
 	} else if v > 0 && r > 0 {
-		println("vr to ip")
+		// println("vr to ip")
 		i = v / r
 		p = i * v
 	} else if i > 0 && v > 0 {
-		println("iv to pr")
+		// println("iv to pr")
 		p = i * v
 		r = v / i
 	} else if p > 0 && i > 0 {
-		println("pi to vr")
+		// println("pi to vr")
 		v = p / i
 		r = v / i
 	} else if r > 0 && i > 0 {
-		println("ri to pv")
+		// println("ri to pv")
 		v = r * i
 		p = i * v
 	} else if r > 0 && p > 0 {
-		println("rp to vi")
+		// println("rp to vi")
 		v = math.Sqrt(r * p)
 		i = v / r
 	} else {
@@ -81,7 +81,7 @@ func prpr(label string, abbrev string, unit string, val float64) {
 
 	// should limit significant figures rather than digits after
 	// decimal point, but well...
-	val = math.Round(val*1000)/1000
+	val = math.Round(val*1000) / 1000
 
 	vval := unitconv.FormatPrefix(val, unitconv.SI, -1)
 	fmt.Printf("%-10s %s = %s%s\n", label, abbrev, vval, unit)
