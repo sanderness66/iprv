@@ -1,4 +1,4 @@
-.TH iprv 1 22-MAY-2022 "Kozmix Go"
+.TH iprv 1 14-JAN-2023 "Kozmix Go"
 
 .SH NAME
 iprv \- calculate electrical current, power, resistance and/or voltage
@@ -15,31 +15,31 @@ voltage, will calculate the other two values. You must call
 with exactly two arguments.
 
 .SH OPTIONS
-.TP
-.B I=val
-specify current in Amperes (alias: i)
-.TP
-.B V=val
-specify voltage in Volts (alias: v)
-.TP
-.B P=val
-specify power in Watts (alias: p)
-.TP
-.B R=val
-specify resistance in Ohms (alias: r)
 
 .B iprv
 accepts SI prefixes (k, M, μ etc.) as part of its command line
-options.
+options, which are:
+
+.TP
+.B I=val
+specify current in amperes (alias: i)
+.TP
+.B V=val
+specify voltage in volts (alias: v)
+.TP
+.B P=val
+specify power in watts (alias: p)
+.TP
+.B R=val
+specify resistance in ohms (alias: r)
 
 .SH EXAMPLE
 .EX
 $ iprv r=8 v=5.23
-vr to ip
-resistance: R = 8
-voltage:    V = 5.23
-current:    I = 0.654
-power:      P = 3.42
+resistance R = 8Ω
+voltage    V = 5.23V
+current    I = 654mA
+power      P = 3.419W
 .EE
 
 .SH AUTHOR
