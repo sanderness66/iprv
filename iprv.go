@@ -1,6 +1,6 @@
 // IPRV -- calculate current, power, resistance and/or voltage from any two.
 //
-// svm 19-MAY-2022 - 22-MAY-2022
+// svm 19-MAY-2022 - 14-JAN-2023
 //
 // I = V/R         R = V/I         V = R*I
 // P = I*V         I = P/V         V = P/I
@@ -10,9 +10,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/dsnet/golib/unitconv"
 	"math"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -28,13 +28,13 @@ func main() {
 			xx := strings.Split(av, "=")
 			switch xx[0] {
 			case "i", "I":
-				i, _ = strconv.ParseFloat(xx[1], 32)
+				i, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
 			case "p", "P":
-				p, _ = strconv.ParseFloat(xx[1], 32)
+				p, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
 			case "v", "V":
-				v, _ = strconv.ParseFloat(xx[1], 32)
+				v, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
 			case "r", "R":
-				r, _ = strconv.ParseFloat(xx[1], 32)
+				r, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
 			}
 		case 2:
 			println("bad arg")
@@ -71,8 +71,15 @@ func main() {
 		os.Exit(1)
 	}
 
-	fmt.Printf("resistance: R = %1.3g\n", r)
-	fmt.Printf("voltage:    V = %1.3g\n", v)
-	fmt.Printf("current:    I = %1.3g\n", i)
-	fmt.Printf("power:      P = %1.3g\n", p)
+	prpr("resistance", "R", "Ω", r)
+	prpr("voltage", "V", "V", v)
+	prpr("current", "I", "A", i)
+	prpr("power", "P", "W", p)
+}
+
+func prpr(label string, abbrev string, unit string, val float64) {
+
+	vval := unitconv.FormatPrefix(val, unitconv.SI, -1)
+	fmt.Printf("%-10s %s = %s%s\n", label, abbrev, vval, unit)
+
 }
