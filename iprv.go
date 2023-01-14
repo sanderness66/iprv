@@ -79,7 +79,10 @@ func main() {
 
 func prpr(label string, abbrev string, unit string, val float64) {
 
+	// should limit significant figures rather than digits after
+	// decimal point, but well...
+	val = math.Round(val*1000)/1000
+
 	vval := unitconv.FormatPrefix(val, unitconv.SI, -1)
 	fmt.Printf("%-10s %s = %s%s\n", label, abbrev, vval, unit)
-
 }
