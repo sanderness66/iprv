@@ -1,6 +1,6 @@
 // IPRV -- calculate current, power, resistance and/or voltage from any two.
 //
-// svm 19-MAY-2022 - 24-FEB-2023
+// svm 19-MAY-2022 - 13-MAR-2023
 //
 // I = V/R         R = V/I         V = R*I
 // P = I*V         I = P/V         V = P/I
@@ -9,9 +9,8 @@
 package main
 
 import (
-	"flag"
 	"fmt"
-	"github.com/dsnet/golib/unitconv"
+	"github.com/dustin/go-humanize"
 	"math"
 	"os"
 	"strings"
@@ -19,28 +18,27 @@ import (
 
 func main() {
 	var i, p, v, r float64
-	var raw bool
 
-	flag.BoolVar(&raw, "r", false, "print raw numeric output")
-	flag.Parse()
-	if flag.NArg() != 2 {
-		println("bad arg")
-		os.Exit(1)
-	}
-
-	for _, av := range flag.Args() {
-		// we might want to implement some sort of
-		// sanity checking here some day.
-		xx := strings.Split(av, "=")
-		switch xx[0] {
-		case "i", "I":
-			i, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
-		case "p", "P":
-			p, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
-		case "v", "V":
-			v, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
-		case "r", "R":
-			r, _ = unitconv.ParsePrefix(xx[1], unitconv.AutoParse)
+	args := os.Args[1:]
+	for ac, av := range args {
+		switch ac {
+		case 0, 1:
+			// we might want to implement some sort of
+			// sanity checking here some day.
+			xx := strings.Split(av, "=")
+			switch xx[0] {
+			case "i", "I":
+				i, _, _ = humanize.ParseSI(xx[1])
+			case "p", "P":
+				p, _, _ = humanize.ParseSI(xx[1])
+			case "v", "V":
+				v, _, _ = humanize.ParseSI(xx[1])
+			case "r", "R":
+				r, _, _ = humanize.ParseSI(xx[1])
+			}
+		case 2:
+			println("bad arg")
+			os.Exit(1)
 		}
 	}
 
@@ -73,22 +71,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	prpr("resistance", "R", "Ω", r, raw)
-	prpr("voltage", "V", "V", v, raw)
-	prpr("current", "I", "A", i, raw)
-	prpr("power", "P", "W", p, raw)
+	prpr("resistance", "R", "Ω", r)
+	prpr("voltage", "V", "V", v)
+	prpr("current", "I", "A", i)
+	prpr("power", "P", "W", p)
 }
 
-func prpr(label string, abbrev string, unit string, val float64, raw bool) {
-
-	if raw == true {
-		fmt.Printf("%-10s %s = %f%s\n", label, abbrev, val, unit)
-	} else {
-		// should limit significant figures rather than digits after
-		// decimal point, but well...
-		val = math.Round(val*1000) / 1000
-
-		vval := unitconv.FormatPrefix(val, unitconv.SI, -1)
-		fmt.Printf("%-10s %s = %s%s\n", label, abbrev, vval, unit)
-	}
+func prpr(label string, abbrev string, unit string, val float64) {
+	vval := humanize.SIWithDigits(val, 2, unit)
+	fmt.Printf("%-10s %s = %s\n", label, abbrev, vval)
 }

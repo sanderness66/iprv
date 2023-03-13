@@ -5,16 +5,14 @@ iprv \- calculate electrical current, power, resistance and/or voltage
 
 .SH SYNOPSIS
 .B iprv
-[-r] [I=val] [V=val] [P=val] [R=val]
+[I=val] [V=val] [P=val] [R=val]
 
 .SH DESCRIPTION
 .BR iprv,
 given any two out of electrical current, power, resistance or
 voltage, will calculate the other two values. You must call
 .B iprv
-with exactly two of the
-.B X=val
-arguments.
+with exactly two arguments.
 
 .SH OPTIONS
 
@@ -34,10 +32,6 @@ specify power in watts (alias: p)
 .TP
 .B R=val
 specify resistance in ohms (alias: r)
-
-.TP
-.B -r
-print values in a raw format (otherwise they're printed in a readable format)
 
 .SH EXAMPLE
 .EX
