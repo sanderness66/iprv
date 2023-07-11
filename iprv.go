@@ -1,9 +1,12 @@
 // IPRV -- calculate current, power, resistance and/or voltage from any two.
 //
-// svm 19-MAY-2022 - 13-MAR-2023
+// svm 19-MAY-2022 - 11-JUL-2023
 //
 // I = V/R         R = V/I         V = R*I
 // P = I*V         I = P/V         V = P/I
+//
+// a. humanize.SIWithDigits() seems to do its own rounding, and it seems to round down?
+// b. humanize.ParseSI() doesn't seem to recognise μ
 //
 
 package main
@@ -33,6 +36,9 @@ func main() {
 				p, _, _ = humanize.ParseSI(xx[1])
 			case "v", "V":
 				v, _, _ = humanize.ParseSI(xx[1])
+			case "vp", "VP", "Vp", "vP":
+				v, _, _ = humanize.ParseSI(xx[1])
+				v = v / math.Sqrt(2)
 			case "r", "R":
 				r, _, _ = humanize.ParseSI(xx[1])
 			}
