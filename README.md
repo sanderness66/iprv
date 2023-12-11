@@ -46,13 +46,13 @@ options, which are:
 
 # Example
 
-.EX
+<code>
 $ iprv r=8 vp=7.4
 resistance R = 8 Ω
 voltage    V = 5.23 V
 current    I = 654.07 mA
 power      P = 3.42 W
-.EE
+</code>
 
 
 <a name="author"></a>
